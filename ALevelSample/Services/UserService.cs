@@ -57,4 +57,24 @@ public class UserService : BaseDataService<ApplicationDbContext>, IUserService
             FullName = $"{user.FirstName} {user.LastName}"
         };
     }
+
+    public async Task<User> UpdateUser(string id, string updateName, string updateLastName)
+    {
+        var user = await _userRepository.UpdateUserAsync(id, updateName, updateLastName);
+
+        if (user == null)
+        {
+            _loggerService.LogWarning($"Not founded user with Id = {id}");
+            return null!;
+        }
+
+        _loggerService.LogWarning($"Updated user: {user.FirstName} {user.LastName}");
+        return new User()
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            FullName = $"{user.FirstName} {user.LastName}"
+        };
+    }
 }

@@ -30,6 +30,11 @@ public class App
 
         await _userService.GetUser(userId);
 
+        var updateName = "Alex";
+        var updateLastName = "Abrams";
+
+        await _userService.UpdateUser(userId, updateName, updateLastName);
+
         var product1 = await _productService.AddProductAsync("product1", 4);
         var product2 = await _productService.AddProductAsync("product2", 7);
 
