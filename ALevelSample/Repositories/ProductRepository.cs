@@ -1,6 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ALevelSample.Data;
 using ALevelSample.Data.Entities;
+using ALevelSample.Models;
 using ALevelSample.Repositories.Abstractions;
 using ALevelSample.Services.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -34,5 +37,14 @@ public class ProductRepository : IProductRepository
     public async Task<ProductEntity?> GetProductAsync(int id)
     {
         return await _dbContext.Products.FirstOrDefaultAsync(f => f.Id == id);
+    }
+
+    public List<ProductEntity> GetProductsFromDb()
+    {
+        var products = _dbContext.Products
+            .Where(p => p.Price == 4)
+            .OrderByDescending(p => p.Price)
+            .ToList();
+        return products;
     }
 }

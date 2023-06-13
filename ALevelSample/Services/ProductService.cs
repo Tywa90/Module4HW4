@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ALevelSample.Data;
+using ALevelSample.Data.Entities;
 using ALevelSample.Models;
 using ALevelSample.Repositories.Abstractions;
 using ALevelSample.Services.Abstractions;
@@ -46,5 +49,17 @@ public class ProductService : BaseDataService<ApplicationDbContext>, IProductSer
             Name = result.Name,
             Price = result.Price
         };
+    }
+
+    public List<ProductEntity> GetProductsTable()
+    {
+        var result = _productRepository.GetProductsFromDb();
+
+        foreach (var product in result)
+        {
+            Console.WriteLine($"{product.Id}-{product.Name}-{product.Price}");
+        }
+
+        return result;
     }
 }
