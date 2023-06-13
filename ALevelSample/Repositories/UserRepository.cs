@@ -53,4 +53,20 @@ public class UserRepository : IUserRepository
 
         return user;
     }
+
+    public async Task<bool> DeleteUserAsync(string id)
+    {
+        var user = await _dbContext.Users.FirstOrDefaultAsync(f => f.Id == id);
+
+        if (user == null)
+        {
+            return false;
+        }
+        else
+        {
+            _dbContext.Users.Remove(user);
+            _dbContext.SaveChanges();
+            return true;
+        }
+    }
 }

@@ -35,6 +35,9 @@ public class App
 
         await _userService.UpdateUser(userId, updateName, updateLastName);
 
+        var deleteUserById = "091e3d52-8ca3-4f92-8712-f974f3594fe2";
+        await _userService.DeleteUser(deleteUserById);
+
         var product1 = await _productService.AddProductAsync("product1", 4);
         var product2 = await _productService.AddProductAsync("product2", 7);
 
