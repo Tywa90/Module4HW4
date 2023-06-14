@@ -39,12 +39,19 @@ public class ProductRepository : IProductRepository
         return await _dbContext.Products.FirstOrDefaultAsync(f => f.Id == id);
     }
 
-    public List<ProductEntity> GetProductsFromDb()
+    public List<ProductEntity> GetProductsFromDb(int page, out int totalPages)
     {
+        int rowsOnPage = 20;
+        int skipRows = (page - 1) * rowsOnPage;
+
         var products = _dbContext.Products
-            .Where(p => p.Price == 4)
-            .OrderByDescending(p => p.Price)
-            .ToList();
+                        .Where(p => p.Price == 4)
+                        .OrderByDescending(p => p.Price)
+                        .Skip(skipRows)
+                        .Take(rowsOnPage)
+                        .ToList();
+        totalPages = _dbContext.Products.Count() / 20;
+
         return products;
     }
 }

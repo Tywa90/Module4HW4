@@ -8,5 +8,5 @@ public interface IProductRepository
 {
     Task<int> AddProductAsync(string name, double price);
     Task<ProductEntity?> GetProductAsync(int id);
-    public List<ProductEntity> GetProductsFromDb();
+    public List<ProductEntity> GetProductsFromDb(int page, out int totalPages);
 }

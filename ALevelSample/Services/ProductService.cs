@@ -51,10 +51,10 @@ public class ProductService : BaseDataService<ApplicationDbContext>, IProductSer
         };
     }
 
-    public List<ProductEntity> GetProductsTable()
+    public List<ProductEntity> GetProductsTable(int page)
     {
-        var result = _productRepository.GetProductsFromDb();
-
+        var result = _productRepository.GetProductsFromDb(page, out int totalPages);
+        Console.WriteLine($"Page {page} / {totalPages} from Products");
         foreach (var product in result)
         {
             Console.WriteLine($"{product.Id}-{product.Name}-{product.Price}");

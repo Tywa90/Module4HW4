@@ -9,5 +9,5 @@ public interface IProductService
 {
     Task<int> AddProductAsync(string name, double price);
     Task<Product> GetProductAsync(int id);
-    public List<ProductEntity> GetProductsTable();
+    public List<ProductEntity> GetProductsTable(int page);
 }

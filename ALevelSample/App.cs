@@ -73,6 +73,7 @@ public class App
 
         var userOrder = await _orderService.GetOrderByUserIdAsync(userId);
 
-        var displayProducts = _productService.GetProductsTable();
+        int page = 2;
+        var displayProducts = _productService.GetProductsTable(page);
     }
 }
